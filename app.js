@@ -4,7 +4,7 @@ let poderGanhoAtual = 20;
 let paranoia = 0;
 let poderInimigo = 100;
 let rodadaAtual = 0;
-let poderGanhoPorSegundo = 1;
+let poderGanhoPorSegundo = 0.5;
 let cronometroInimigo;
 let cenasDestaPartida = [];
 let nivelAtualJogado = 1;
@@ -361,10 +361,10 @@ function iniciarNivel(numeroNivel) {
     mudarTela(telaNegociacao);
 
     // SISTEMA DE DIFICULDADE DINÂMICA
-    if (numeroNivel <= 5) { poderGanhoPorSegundo = 1; }
-    else if (numeroNivel <= 10) { poderGanhoPorSegundo = 2; }
-    else if (numeroNivel <= 15) { poderGanhoPorSegundo = 3; }
-    else { poderGanhoPorSegundo = 5; }
+    if (numeroNivel <= 5) { poderGanhoPorSegundo = 0.5; }
+    else if (numeroNivel <= 10) { poderGanhoPorSegundo = 1.5; }
+    else if (numeroNivel <= 15) { poderGanhoPorSegundo = 2; }
+    else { poderGanhoPorSegundo = 4; }
     iniciarCronometro();
 
     historicoChat.innerHTML += `<p class="fala-npc"><strong>Vendedor:</strong> ${cenasDestaPartida[0].falaNPC}</p>`;
@@ -459,16 +459,16 @@ const bancoDeCartas = [
     { id: 8, nome: "Arco e flecha", tipo: "ataque", descricao: "Um ataque rápido que desgasta a entidade.", valor: 20, imagem: "imagens/carta-arco.png" },
     { id: 9, nome: "Amuleto da Serenidade", tipo: "defesa", descricao: "Reduz o dano recebido por um turno.", valor: 20, imagem: "imagens/carta-amuleto.png" },
     { id: 10, nome: "Luz do Amanhecer", tipo: "ataque", descricao: "Um ataque poderoso que pode acabar com a entidade.", valor: 50, imagem: "imagens/carta-luz.png" },
-    { id: 11, nome: "Véu da Ilusão", tipo: "defesa", descricao: "Confunde a entidade, reduzindo seu próximo ataque em 50%.", valor: 0, imagem: "imagens/carta-veu.png" },
-    { id: 12, nome: "Garras do Desespero", tipo: "ataque", descricao: "Ataque desesperado, dano baseado na sanidade perdida (dano = 1.5x sanidade perdida).", valor: 0, imagem: "imagens/carta-garras.png" },
+    { id: 11, nome: "Véu da Ilusão", tipo: "defesa", descricao: "Confunde a entidade, reduzindo seu próximo ataque em 50%.", valor: 25, imagem: "imagens/carta-veu.png" },
+    { id: 12, nome: "Garras do Desespero", tipo: "ataque", descricao: "Ataque desesperado, dano baseado na sanidade perdida (dano = 1.5x sanidade perdida).", valor: 20, imagem: "imagens/carta-garras.png" },
     { id: 13, nome: "Cura da Alma", tipo: "defesa", descricao: "Restaura sanidade baseada no poder atual do inimigo.", valor: 10, imagem: "imagens/carta-cura.png" },
-    { id: 14, nome: "Explosão de Paranoia", tipo: "ataque", descricao: "Causa dano baseado na sua paranoia atual (dano = 0.3x paranoia).", valor: 0, imagem: "imagens/carta-explosao.png" },
-    { id: 15, nome: "Barreira de Sangue", tipo: "defesa", descricao: "Absorve dano igual a 20% da sua sanidade atual.", valor: 0, imagem: "imagens/carta-barreira.png" },
+    { id: 14, nome: "Explosão de Paranoia", tipo: "ataque", descricao: "Causa dano baseado na sua paranoia atual (dano = 0.3x paranoia).", valor: 24, imagem: "imagens/carta-explosao.png" },
+    { id: 15, nome: "Barreira de Sangue", tipo: "defesa", descricao: "Absorve dano igual a 20% da sua sanidade atual.", valor: 25, imagem: "imagens/carta-barreira.png" },
     { id: 16, nome: "Foice do Vazio", tipo: "ataque", descricao: "Dano massivo. Apenas para os dignos.", valor: 100, imagem: "imagens/carta-foice.png", nivelMinimo: 17 },
     { id: 17, nome: "Aura Divina", tipo: "defesa", descricao: "Uma cura divina de alto nível.", valor: 80, imagem: "imagens/carta-aura.png", nivelMinimo: 17 },
     { id: 18, nome: "Chama Eterna", tipo: "ataque", descricao: "Um ataque que queima a própria essência da entidade.", valor: 60, imagem: "imagens/carta-chama.png", nivelMinimo: 15 },
     { id: 19, nome: "Escudo de Cristal", tipo: "defesa", descricao: "Cria uma barreira que reflete parte do dano de volta à entidade.", valor: 50, imagem: "imagens/carta-escudo.png", nivelMinimo: 15 },
-    { id: 20, nome: "Espada do Caos", tipo: "ataque", descricao: "Um ataque caótico que causa dano aleatório entre 10 e 100.", valor: 0, imagem: "imagens/carta-espada.png", nivelMinimo: 10 }
+    { id: 20, nome: "Espada do Caos", tipo: "ataque", descricao: "Um ataque caótico que causa dano aleatório entre 10 e 100.", valor: 55, imagem: "imagens/carta-espada.png", nivelMinimo: 10 }
 ];
 
 function iniciarCombate() {

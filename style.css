@@ -385,3 +385,45 @@ button:disabled {
     overflow-y: auto;
     padding-right: 10px;
 }
+
+/* --- ESTILO ESPECÍFICO DO GLOSSÁRIO (LISTA DE CARTAS) --- */
+.lista-cartas {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px;
+    width: 90%;
+    align-items: center;
+}
+
+/* Redefine o formato da carta apenas dentro do glossário */
+.lista-cartas .carta {
+    flex-direction: row; 
+    width: 100%;
+    max-width: 500px;
+    height: auto; 
+    min-height: 100px;
+}
+
+.lista-cartas .carta-arte {
+    width: 100px; 
+    height: 100px;
+    border-bottom: none;
+    border-right: 2px solid #333;
+}
+
+.lista-cartas .carta-conteudo {
+    justify-content: center;
+    padding: 10px 15px;
+}
+
+/* Força a descrição a aparecer no celular dentro do glossário */
+@media (max-width: 600px) {
+    .lista-cartas .carta-descricao {
+        display: block !important;
+        font-size: 0.85em; 
+        margin: 5px 0;
+    }
+    .lista-cartas .carta-titulo {
+        font-size: 1.1em;
+    }
+}
