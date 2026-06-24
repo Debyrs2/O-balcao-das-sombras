@@ -77,11 +77,12 @@
             <source src="videos/ent-disputa.mp4" type="video/mp4">
         </video>
         <div class="mascara-escura">
-
-            <header style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;">
-                <div>
+            <header
+                style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
+                <div style="flex: 1; min-width: 250px;">
                     <h1>O Confronto</h1>
-                    <div class="status-bar">Derrote a Entidade!</div
+                    <div class="status-bar">Derrote a Entidade!</div>
+
                     <div class="status-bar timer-alerta" style="font-size: 1.2em; margin-top: 10px;">
                         Poder da Entidade: <span id="poder-atual-inimigo"
                             style="color: #ff4444; font-weight: bold;">100</span>
@@ -89,7 +90,7 @@
                             style="color: #cca43b; margin-left: 5px;">(Aumentando...)</span>
                     </div>
                 </div>
-                <div style="display: flex; gap: 10px;">
+                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
                     <button onclick="pausarJogo()" style="background-color: #333;">⏸ Pausar / Cartas</button>
                     <button onclick="voltarAoMenu()">Fugir</button>
                 </div>
@@ -109,7 +110,7 @@
                 <div id="mao-jogador" class="mao-cartas"></div>
             </main>
 
-        </div> 
+        </div>
     </div>
 
     <div id="tela-vitoria" class="tela-oculta tela-fundo">

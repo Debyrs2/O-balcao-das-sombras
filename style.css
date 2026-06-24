@@ -205,6 +205,7 @@ button:disabled {
     justify-content: center;
     width: 100%;
     max-width: 800px;
+    padding: 0 10px;
 }
 
 /* O Molde da Carta Responsivo */
@@ -299,18 +300,35 @@ button:disabled {
 /* RESPONSIVIDADE PARA CELULARES */
 @media (max-width: 600px) {
     h1 {
-        font-size: 2em !important;
+        font-size: 1.8em !important;
     }
 
     header {
         flex-direction: column;
         text-align: center;
+        gap: 15px;
+    }
+
+    .controles-jogador {
+        width: 100%;
+    }
+
+    #feedback-combate {
+        font-size: 1.1em;
+        padding: 10px;
+        width: 95%;
+    }
+
+    .mao-cartas {
         gap: 10px;
+        padding: 0 5px;
     }
 
     .carta {
-        width: 100px;
-        height: 180px;
+        width: calc(50% - 10px);
+        max-width: 130px;
+        height: 190px;
+        flex-shrink: 0;
     }
 
     .carta-arte {
@@ -318,16 +336,15 @@ button:disabled {
     }
 
     .carta-titulo {
-        font-size: 0.7em;
+        font-size: 0.75em;
     }
 
     .carta-descricao {
         display: none;
     }
 
-    /* Esconde a descrição no celular para caber na tela */
-    .mao-cartas {
-        gap: 5px;
+    .carta-efeito {
+        font-size: 0.85em;
     }
 }
 
