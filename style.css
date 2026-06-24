@@ -1,0 +1,370 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #000;
+    color: #e0e0e0;
+    font-family: 'Courier New', Courier, monospace;
+    overflow-x: hidden;
+    /* Evita barra de rolagem horizontal no celular */
+}
+
+/* --- FUNDO E VÍDEOS --- */
+.tela-fundo {
+    width: 100vw;
+    min-height: 100vh;
+    background-size: cover;
+    background-position: center bottom;
+    background-attachment: fixed;
+    position: relative;
+    /* Necessário para conter o vídeo de fundo */
+    overflow: hidden;
+    /* Corta sobras do vídeo */
+}
+
+/* motor de vídeo para o fundo */
+.video-fundo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Garante que o vídeo estique sem perder a proporção */
+    z-index: 0;
+    /* Joga o vídeo para trás de tudo */
+}
+
+/* Escurece a imagem de fundo para o texto ficar legível*/
+.mascara-escura {
+    width: 100%;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    /* Fica acima do vídeo (que é z-index 0) */
+}
+
+#tela-inicial .mascara-escura {
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+h1 {
+    color: #b82323;
+    text-shadow: 2px 2px 4px #000;
+}
+
+.status-bar {
+    font-size: 1.15em;
+    color: #ccc;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+/* Animação para avisar que o tempo está passando na Negociação */
+.timer-alerta {
+    color: #cca43b;
+    animation: pulsar 2s infinite;
+}
+
+@keyframes pulsar {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+        color: #ff4444;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.chat-container {
+    background-color: rgba(17, 17, 17, 0.95);
+    border: 1px solid #444;
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    /* Força a caixa a se abrir */
+    max-width: 700px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    min-height: 300px;
+    /* Garante tamanho mesmo sem texto */
+}
+
+.historico {
+    margin-bottom: 20px;
+    min-height: 150px;
+    max-height: 300px;
+    overflow-y: auto;
+    border-bottom: 1px solid #444;
+    padding-bottom: 10px;
+}
+
+.fala-npc {
+    color: #cca43b;
+    margin-bottom: 12px;
+    font-size: 1.25em;
+}
+
+.fala-jogador {
+    color: #4a90e2;
+    margin-bottom: 12px;
+    text-align: right;
+    font-size: 1.15em;
+}
+
+.controles-jogador {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+button {
+    background-color: rgba(26, 26, 26, 0.9);
+    color: #fff;
+    border: 1px solid #555;
+    padding: 12px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.2s ease;
+    border-radius: 5px;
+}
+
+button:hover:not(:disabled) {
+    background-color: #b82323;
+    border-color: #ff3333;
+}
+
+button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.tela-ativa {
+    display: block;
+}
+
+.tela-oculta {
+    display: none;
+}
+
+/* --- FASE B (Mesa e Cartas) --- */
+.mesa-cartas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+#area-inimigo {
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    background-color: rgba(26, 5, 5, 0.8);
+    border: 1px solid #b82323;
+    padding: 15px;
+    border-radius: 8px;
+}
+
+#feedback-combate {
+    font-style: italic;
+    color: #fff;
+    font-size: 1.4em;
+    text-shadow: 2px 2px 5px #000;
+    text-align: center;
+    min-height: 50px;
+    background-color: rgba(20, 20, 20, 0.9);
+    border: 1px solid #cca43b;
+    padding: 10px 20px;
+    border-radius: 8px;
+    width: 100%;
+    max-width: 600px;
+    margin: 10px 0;
+}
+
+.mao-cartas {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 800px;
+}
+
+/* O Molde da Carta Responsivo */
+.carta {
+    background-color: #111;
+    border: 2px solid #555;
+    border-radius: 8px;
+    width: 140px;
+    height: 230px;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+    transition: transform 0.2s;
+    overflow: hidden;
+}
+
+.carta:hover {
+    transform: translateY(-10px) scale(1.05);
+    border-color: #cca43b;
+    box-shadow: 0 5px 15px rgba(204, 164, 59, 0.5);
+}
+
+.carta-arte {
+    width: 100%;
+    height: 100px;
+    object-fit: cover;
+    border-bottom: 2px solid #333;
+}
+
+.carta-conteudo {
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carta-titulo {
+    font-size: 0.85em;
+    font-weight: bold;
+    color: #eee;
+    border-bottom: 1px dashed #333;
+    padding-bottom: 3px;
+}
+
+.carta-descricao {
+    font-size: 0.65em;
+    color: #888;
+    margin-top: 5px;
+}
+
+.carta-efeito {
+    font-size: 0.9em;
+    margin-top: 5px;
+    font-weight: bold;
+}
+
+.carta-ataque {
+    color: #ff4444;
+}
+
+.carta-defesa {
+    color: #4a90e2;
+}
+
+/* A ANIMAÇÃO DE SANGUE DA VITÓRIA */
+.efeito-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    transition: opacity 0.2s ease-out;
+}
+
+.sangue-ativo {
+    background: radial-gradient(circle, transparent 20%, #4a0000 120%);
+    opacity: 1 !important;
+    transition: opacity 2s ease-in;
+}
+
+.luz-ativa {
+    background: radial-gradient(circle, transparent 20%, #cca43b 120%);
+    opacity: 1 !important;
+    transition: opacity 2s ease-in;
+}
+
+/* RESPONSIVIDADE PARA CELULARES */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 2em !important;
+    }
+
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .carta {
+        width: 100px;
+        height: 180px;
+    }
+
+    .carta-arte {
+        height: 70px;
+    }
+
+    .carta-titulo {
+        font-size: 0.7em;
+    }
+
+    .carta-descricao {
+        display: none;
+    }
+
+    /* Esconde a descrição no celular para caber na tela */
+    .mao-cartas {
+        gap: 5px;
+    }
+}
+
+/* TELA DE PAUSA E GLOSSÁRIO */
+.tela-pausa-container {
+    background-color: rgba(10, 10, 10, 0.95);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    overflow-y: auto;
+    pointer-events: auto;
+    z-index: 10000;
+}
+
+/* Efeito do cursor piscando na máquina de escrever */
+.cursor-digitacao::after {
+    content: '|';
+    animation: piscarCursor 0.7s infinite;
+    color: #b82323;
+    margin-left: 5px;
+}
+
+@keyframes piscarCursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+/* Menu scrollável*/
+#grade-niveis {
+    max-height: 60vh;
+    overflow-y: auto;
+    padding-right: 10px;
+}
