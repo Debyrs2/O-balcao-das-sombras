@@ -78,7 +78,7 @@ const bancoDeNiveis = {
         {
             falaNPC: "O cheiro de novato exala de você. Prove que não é da guarda. Qual o sinal do corvo?",
             opcoes: [
-                { texto: "Três batidas e um assobio.", tipo: "senha", correta: false, paranoia: 40, resposta: "Sinal errado. Mais um erro e você morre." },
+                { texto: "Três batidas e um assobio.", tipo: "senha", correta: false, paranoia: 70, resposta: "Sinal errado. Mais um erro e você morre." },
                 { texto: "Assobio rasgado e duas palmas.", tipo: "senha", correta: true, paranoia: 0, resposta: "Pode entrar." }
             ]
         }
@@ -87,7 +87,7 @@ const bancoDeNiveis = {
         {
             falaNPC: "Você voltou. Mas as sombras estão agitadas hoje. Quem te mandou?",
             opcoes: [
-                { texto: "Ninguém. Vim por conta própria.", tipo: "normal", paranoia: 20, resposta: "Mentira. Ninguém vem aqui sozinho." },
+                { texto: "Ninguém. Vim por conta própria.", tipo: "normal", paranoia: 50, resposta: "Mentira. Ninguém vem aqui sozinho." },
                 { texto: "Os sussurros me guiaram.", tipo: "normal", paranoia: 0, resposta: "Então você também os ouve..." },
                 { texto: "🎲 [Blefe 40%] O Mestre do Culto exige suas cartas.", tipo: "sorte", chanceSucesso: 0.4, paranoiaSucesso: -20, respostaSucesso: "P-perdão! Não sabia que servia a ele.", paranoiaFalha: 50, respostaFalha: "O Mestre morreu há anos. Você é um impostor!" }
             ]
@@ -96,7 +96,7 @@ const bancoDeNiveis = {
             falaNPC: "Vamos testar sua audição. As cartas me disseram um número ontem. Quantas almas foram devoradas na última lua?",
             opcoes: [
                 { texto: "Treze.", tipo: "senha", correta: true, paranoia: 0, resposta: "Exato. Treze almas perdidas." },
-                { texto: "Sete.", tipo: "senha", correta: false, paranoia: 35, resposta: "Errado. Você não presta atenção aos sinais." }
+                { texto: "Sete.", tipo: "senha", correta: false, paranoia: 75, resposta: "Errado. Você não presta atenção aos sinais." }
             ]
         }
     ],
@@ -104,7 +104,7 @@ const bancoDeNiveis = {
         {
             falaNPC: "Tem investigadores na cidade. Você está suando. Cheira a medo e a lei.",
             opcoes: [
-                { texto: "É apenas o calor do beco.", tipo: "normal", paranoia: 30, resposta: "O beco é frio como gelo, mentiroso." },
+                { texto: "É apenas o calor do beco.", tipo: "normal", paranoia: 100, resposta: "O beco é frio como gelo, mentiroso." },
                 { texto: "Estou nervoso por estar aqui, admito.", tipo: "normal", paranoia: 10, resposta: "Honestidade. Uma falha, mas aceitável." },
                 { texto: "🎲 [Sorte 30%] Encarar o Vendedor nos olhos sem piscar.", tipo: "sorte", chanceSucesso: 0.3, paranoiaSucesso: -30, respostaSucesso: "Frio e calculista. Gosto disso.", paranoiaFalha: 50, respostaFalha: "Não me encare assim! Está com um comunicador escondido?!" }
             ]
@@ -124,9 +124,9 @@ const bancoDeNiveis = {
         {
             falaNPC: "Vamos jogar. Escondi um olho de vidro debaixo de um destes três copos: Cobre, Prata ou Ouro. O Cobre diz 'Não está aqui'. A Prata diz 'Está no Ouro'. O Ouro diz 'A Prata mente'. Apenas um copo diz a verdade. Onde está o olho?",
             opcoes: [
-                { texto: "No copo de Ouro.", tipo: "senha", correta: false, paranoia: 50, resposta: "Se estivesse no ouro, Prata diria a verdade e Cobre também. Errado!" },
+                { texto: "No copo de Ouro.", tipo: "senha", correta: false, paranoia: 80, resposta: "Se estivesse no ouro, Prata diria a verdade e Cobre também. Errado!" },
                 { texto: "No copo de Prata.", tipo: "senha", correta: true, paranoia: -20, resposta: "Exato. O Cobre diz a verdade, os outros mentem. Inteligente." },
-                { texto: "No copo de Cobre.", tipo: "senha", correta: false, paranoia: 50, resposta: "Se estivesse no cobre, todos estariam mentindo. Errado." }
+                { texto: "No copo de Cobre.", tipo: "senha", correta: false, paranoia: 90, resposta: "Se estivesse no cobre, todos estariam mentindo. Errado." }
             ]
         }
     ],
@@ -136,8 +136,8 @@ const bancoDeNiveis = {
         {
             falaNPC: "Você tem sobrevivido, mas os riscos aumentam. O que você faria se a guarda entrasse no beco agora?",
             opcoes: [
-                { texto: "Eu fugiria correndo.", tipo: "normal", paranoia: 40, resposta: "Covarde. Chamaria a atenção para mim." },
-                { texto: "Eu mataria os guardas.", tipo: "normal", paranoia: 30, resposta: "Psicopata. Isso traria o exército inteiro." },
+                { texto: "Eu fugiria correndo.", tipo: "normal", paranoia: 100, resposta: "Covarde. Chamaria a atenção para mim." },
+                { texto: "Eu mataria os guardas.", tipo: "normal", paranoia: 40, resposta: "Psicopata. Isso traria o exército inteiro." },
                 { texto: "Eu seria apenas um mendigo pedindo esmolas.", tipo: "normal", paranoia: 0, resposta: "Camuflagem perfeita. As sombras aprovam." }
             ]
         },
@@ -362,20 +362,34 @@ function iniciarNivel(numeroNivel) {
 
     // SISTEMA DE DIFICULDADE DINÂMICA
     if (numeroNivel <= 5) { poderGanhoPorSegundo = 0.5; }
-    else if (numeroNivel <= 10) { poderGanhoPorSegundo = 1.5; }
-    else if (numeroNivel <= 15) { poderGanhoPorSegundo = 2; }
-    else { poderGanhoPorSegundo = 4; }
+    else if (numeroNivel <= 10) { poderGanhoPorSegundo = 1; }
+    else if (numeroNivel <= 15) { poderGanhoPorSegundo = 1.5; }
+    else { poderGanhoPorSegundo = 2; }
     iniciarCronometro();
 
     historicoChat.innerHTML += `<p class="fala-npc"><strong>Vendedor:</strong> ${cenasDestaPartida[0].falaNPC}</p>`;
     carregarOpcoesDeDialogo();
 }
 // --- LÓGICA DAS ESCOLHAS (Adaptação da versão anterior) ---
-
 function carregarOpcoesDeDialogo() {
     containerOpcoes.innerHTML = "";
 
     if (rodadaAtual >= cenasDestaPartida.length) {
+
+        // Se terminar a conversa com 50% ou mais de Paranoia
+        if (paranoia >= 50) {
+            historicoChat.innerHTML += `<p class="fala-npc" style="color: #ff4444; font-size: 1.3em;"><strong>Vendedor:</strong> Pensando bem... você faz perguntas demais. Fede a investigador. A negociação acabou, suma daqui!</p>`;
+            historicoChat.scrollTop = historicoChat.scrollHeight;
+            clearInterval(cronometroInimigo);
+
+            const btnDerrota = document.createElement('button');
+            btnDerrota.innerText = "❌ [ O Vendedor te expulsou ]";
+            btnDerrota.style.backgroundColor = "#b82323";
+            btnDerrota.onclick = derrotaNegociacao;
+            containerOpcoes.appendChild(btnDerrota);
+            return;
+        }
+
         const btnFinalizar = document.createElement('button');
         btnFinalizar.innerText = "🗝️ [ Pegar as cartas e ir para o Confronto ]";
         btnFinalizar.style.backgroundColor = "#2b5c2b";
@@ -418,7 +432,18 @@ function processarEscolha(opcao, cenaAtual) {
 
     if (paranoia >= 100) {
         clearInterval(cronometroInimigo);
-        setTimeout(derrotaNegociacao, 800); // Chama a derrota específica do Beco
+        setTimeout(() => {
+            // O Vendedor dá um grito final
+            historicoChat.innerHTML += `<p class="fala-npc" style="color: #ff4444; font-size: 1.3em;"><strong>Vendedor:</strong> CHEGA! VOCÊ É UM DELES! AS SOMBRAS, PEGUEM-NO!</p>`;
+            historicoChat.scrollTop = historicoChat.scrollHeight;
+
+            // O botão da morte aparece
+            const btnDerrota = document.createElement('button');
+            btnDerrota.innerText = "❌ [ As sombras te devoram ]";
+            btnDerrota.style.backgroundColor = "#b82323";
+            btnDerrota.onclick = derrotaNegociacao;
+            containerOpcoes.appendChild(btnDerrota);
+        }, 800);
         return;
     }
 
@@ -438,7 +463,8 @@ function processarEscolha(opcao, cenaAtual) {
             carregarOpcoesDeDialogo();
         }
     }, 800);
-}// --- LÓGICA DA FASE B: O TCG COMPLETO ---
+}
+// --- LÓGICA DA FASE B: O TCG COMPLETO ---
 
 const poderAtualInimigoTxt = document.getElementById('poder-atual-inimigo');
 const sanidadeJogadorTxt = document.getElementById('sanidade-jogador');
@@ -628,8 +654,9 @@ function derrotaNoCombate() {
 }
 
 function derrotaNegociacao() {
-    document.getElementById('titulo-derrota').innerText = "Você fez perguntas demais.";
-    document.getElementById('texto-derrota').innerText = "A paranoia chegou a 100%. O Vendedor chamou as sombras.";
+    clearInterval(cronometroInimigo);
+    document.getElementById('titulo-derrota').innerText = "A Negociação Falhou.";
+    document.getElementById('texto-derrota').innerText = "O Vendedor desconfiou de você e não entregou as cartas. Sem defesa, a Entidade devorou sua mente no beco.";
     document.getElementById('efeito-sangue').classList.add('sangue-ativo');
     mudarTela(telaGameover);
 }
